@@ -6,7 +6,7 @@ namespace KSiP
 {
     class Program
     {
-        static string Alphabet = "абвгґдеєжзиіїйклмнопрстуфхцчшщьюя";//1111,
+        static string Alphabet = "абвгґдеєжзиіїйклмнопрстуфхцчшщьюя"; //your alphabet
 
         static void Main(string[] args)
         {
@@ -18,7 +18,7 @@ namespace KSiP
 
             var decryptedText = Decrypt(encryptedText, CryptoAnalysis(encryptedText));
             
-            Console.WriteLine(decryptedText);//decryptedText);
+            Console.WriteLine(decryptedText);
         }
 
         /// <summary>
