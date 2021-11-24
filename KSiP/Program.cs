@@ -6,7 +6,7 @@ namespace KSiP
 {
     class Program
     {
-        static string Alphabet = "абвгґдеєжзиіїйклмнопрстуфхцчшщьюя";//1111
+        static string Alphabet = "абвгґдеєжзиіїйклмнопрстуфхцчшщьюя";//1111,
 
         static void Main(string[] args)
         {
