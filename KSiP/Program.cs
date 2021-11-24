@@ -6,18 +6,18 @@ namespace KSiP
 {
     class Program
     {
-        static string Alphabet = "абвгґдеєжзиіїйклмнопрстуфхцчшщьюя"; //your alphabet
+        static string Alphabet = "АБВГҐДЕЄЖЗИІЇЙКЛМНОПРСТУФХЦЧШЩЬЮЯабвгґдеєжзиіїйклмнопрстуфхцчшщьюя"; //your alphabet
 
         static void Main(string[] args)
         {
             Console.OutputEncoding = System.Text.Encoding.Unicode;
 
-            var rawText = Text.RawText.ToLower();
+            var rawText = Text.RawText;
 
-            var encryptedText = Encrypt(rawText, 23);
+            var encryptedText = Encrypt(rawText, 100);
 
             var decryptedText = Decrypt(encryptedText, CryptoAnalysis(encryptedText));
-            
+           
             Console.WriteLine(decryptedText);
         }
 
@@ -35,21 +35,14 @@ namespace KSiP
             {
                 if (Alphabet.IndexOf(symbol) != -1)
                 {
-                    if (Alphabet.IndexOf(symbol) + rot < Alphabet.Length)
-                    {
-                        encryptedText += Alphabet[Alphabet.IndexOf(symbol) + rot];
-                    }
-                    else
-                    {
-                        encryptedText += Alphabet[(Alphabet.IndexOf(symbol) + rot) - Alphabet.Length];
-                    }
+                    encryptedText += Alphabet[(Alphabet.IndexOf(symbol) + rot) % Alphabet.Length];
                 }
                 else
                 {
                     encryptedText += symbol;
                 }
             }
-                return encryptedText;
+            return encryptedText;
         }
 
         /// <summary>
@@ -66,7 +59,7 @@ namespace KSiP
             {
                 if (Alphabet.IndexOf(symbol) != -1)
                 {
-                    if (Alphabet.IndexOf(symbol) - rot >= 0)
+                    if ((Alphabet.IndexOf(symbol) - rot) >= 0)
                     {
                         decryptedText += Alphabet[Alphabet.IndexOf(symbol) - rot];
                     }
@@ -107,14 +100,14 @@ namespace KSiP
                     }
                 }
             }
-        
+
             var mostCommon = dictionary.OrderByDescending(el => el.Value)
                                        .Select(el => el.Key)
                                        .ToList()[0];
 
-            var rot = Alphabet.IndexOf(mostCommon);
+            var rot = Alphabet.IndexOf(mostCommon) - Alphabet.IndexOf('о');
 
-            return rot + Alphabet.Length - Alphabet.IndexOf('о');
+            return (rot < 0) ? rot + Alphabet.Length : rot;
         }
     }
 }
